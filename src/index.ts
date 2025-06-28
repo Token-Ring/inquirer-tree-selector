@@ -177,13 +177,21 @@ export function treeSelector(
         items: children ?? [],
         active,
         renderItem: ({ item, index, isActive }) => {
+          // Check if the item should be highlighted based on prefix
+          const isHighlightedByPrefix =
+            item.prefix != null &&
+            selectedItems.some(selectedItem =>
+              selectedItem.startsWith(item.prefix!)
+            )
+
           return theme.renderItem(item, {
             items: children ?? [],
             loop,
             index,
             isActive,
             isSelected:
-              item.value != null && selectedItems.includes(item.value),
+              (item.value != null && selectedItems.includes(item.value)) ||
+              isHighlightedByPrefix,
             multiple
           })
         },

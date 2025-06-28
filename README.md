@@ -16,6 +16,7 @@ A prompt implementation for [Inquirer.js](https://github.com/SBoudrias/Inquirer.
 - **Asynchronous Loading** – Load tree nodes asynchronously as needed.
 - **Multiple Selection** – Select multiple items at once.
 - **Initial Selection** – Pre-select items when the prompt starts.
+- **Prefix Highlighting** - Highlight parent items if a child item, that has not yet been loaded, is selected.
 - **Custom Filters** – Apply filters to show only specific item types.
 - **Keyboard Navigation** – Use arrow keys for easy selection.
 - **Theming** – Customize the appearance of the prompt.
@@ -79,6 +80,16 @@ const selection: Item = await treeSelector({
         'Async Subitem 1',
         'Async Subitem 2'
       ])
+    },
+    {
+      name: 'Category 3 (with prefix highlighting)',
+      // No value, so not directly selectable
+      prefix: 'category-3-item-', // Will highlight if a selected item starts with this
+      hasChildren: true,
+      children: [
+        { name: 'Item 3.1', value: 'category-3-item-1' },
+        { name: 'Item 3.2', value: 'category-3-item-2' }
+      ]
     }
   ]
 })
